@@ -1,13 +1,11 @@
-.board {
-    display: flex;
-}
-
 .weeks {
     display: flex;
     flex-direction: row;
-
+    margin-top: 10px;
 }
 
 .week {
+    display: flex;
+    flex-direction: column;
 
 }

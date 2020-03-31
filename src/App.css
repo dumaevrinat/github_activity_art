@@ -1,9 +1,21 @@
-.status {
+.app {
+    display: flex;
+    flex-direction: column;
     font-size: medium;
     font-family: FuturaDemiC, sans-serif;
 }
 
+.status {
+}
+
 .startDate {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.clearButton {
+    height: 30px;
+    width: 90px;
     font-size: medium;
     font-family: FuturaDemiC, sans-serif;
 }

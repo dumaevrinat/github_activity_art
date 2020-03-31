@@ -20,7 +20,7 @@ class App extends React.Component {
         }
 
         this.state = {
-            selectedColor: '#ebedf0',
+            selectedColor: 4,
             colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
             status: undefined,
             startDate: startDate,
@@ -31,7 +31,7 @@ class App extends React.Component {
     handleClick(i) {
         const squares = this.state.squares.slice();
         squares[i] = {
-            bgColor: this.state.selectedColor,
+            bgColor: this.state.colors[this.state.selectedColor],
             date: this.state.squares[i].date,
         };
         this.setState({
@@ -54,32 +54,55 @@ class App extends React.Component {
 
     handleOnClickColorButton(i) {
         this.setState({
-            selectedColor: this.state.colors[i],
+            selectedColor: i,
         })
     }
 
 
     render() {
         return (
-            <div>
+            <div className='app'>
                 <ColorPalette
                     colors={this.state.colors}
+                    selectedColor={this.state.selectedColor}
                     handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
                 />
+
+                <div className='startDate'>
+                    {'Start Date: ' + this.state.startDate}
+                </div>
+
+                <button className='clearButton' onClick={() => this.handleClearClick()}>
+                    Clear
+                </button>
+
                 <Board
                     squares={this.state.squares}
                     handleClick={(i) => this.handleClick(i)}
                     handleMouseOver={(i) => this.handleMouseOver(i)}
                     handleMouseOut={() => this.handleMouseOut()}
                 />
+
                 <div className='status'>
                     {this.state.status}
                 </div>
-                <div className='startDate'>
-                    {'Start Date: ' + this.state.startDate}
-                </div>
             </div>
         )
+    }
+
+    handleClearClick() {
+        const squares = this.state.squares.slice();
+        const newSquares = squares.map((square) => {
+                return {
+                    bgColor: this.state.colors[0],
+                    date: square.date
+                };
+            }
+        );
+
+        this.setState({
+            squares: newSquares,
+        });
     }
 }
 

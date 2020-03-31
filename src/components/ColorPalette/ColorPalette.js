@@ -5,6 +5,11 @@ function ColorPalette(props){
     const renderColorButton = (i) => {
         let style = {};
         style.backgroundColor = props.colors[i];
+
+        if (i == props.selectedColor) {
+            style.border = '2px solid black';
+        }
+
         return (
             <button
                 key={i}
