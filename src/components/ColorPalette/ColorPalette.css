@@ -1,0 +1,14 @@
+.colorPanel {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.colorButton {
+    height: 15px;
+    width: 15px;
+    border: none;
+    outline: none;
+    padding: 0px;
+    margin: 2px;
+}
