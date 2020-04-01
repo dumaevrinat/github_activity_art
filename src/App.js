@@ -6,21 +6,24 @@ import './App.css'
 class App extends React.Component {
     constructor(props) {
         super(props);
+
         let startDate = new Date();
+        startDate.setDate(startDate.getDate() - 365 - startDate.getDay() + 1);
+
         let squares = new Array(53 * 7);
 
         for (let i = 0; i < squares.length; i += 1) {
-            let dayDate = new Date();
-            dayDate.setDate(startDate.getDate() + i);
-
+            let dayDate = new Date(startDate);
+            dayDate.setDate(dayDate.getDate() + i);
             squares[i] = {
                 bgColor: '#ebedf0',
                 date: dayDate,
+                type: 0,
             }
         }
 
         this.state = {
-            selectedColor: 4,
+            selectedType: 4,
             colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
             status: undefined,
             startDate: startDate,
@@ -31,8 +34,9 @@ class App extends React.Component {
     handleClick(i) {
         const squares = this.state.squares.slice();
         squares[i] = {
-            bgColor: this.state.colors[this.state.selectedColor],
+            bgColor: this.state.colors[this.state.selectedType],
             date: this.state.squares[i].date,
+            type: this.state.selectedType
         };
         this.setState({
             squares: squares,
@@ -54,7 +58,7 @@ class App extends React.Component {
 
     handleOnClickColorButton(i) {
         this.setState({
-            selectedColor: i,
+            selectedType: i,
         })
     }
 
@@ -64,7 +68,7 @@ class App extends React.Component {
             <div className='app'>
                 <ColorPalette
                     colors={this.state.colors}
-                    selectedColor={this.state.selectedColor}
+                    selectedType={this.state.selectedType}
                     handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
                 />
 
