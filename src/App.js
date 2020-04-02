@@ -25,34 +25,77 @@ class App extends React.Component {
         this.state = {
             selectedType: 4,
             colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
-            status: undefined,
+            commitsCount: [0, 2, 5, 7, 10],
+            status: ' ',
             startDate: startDate,
             squares: squares,
+            generatedCode: undefined,
+            isMouseDown: false
         };
     }
 
-    handleClick(i) {
+    handleMouseDown(i) {
         const squares = this.state.squares.slice();
         squares[i] = {
             bgColor: this.state.colors[this.state.selectedType],
             date: this.state.squares[i].date,
             type: this.state.selectedType
         };
+
         this.setState({
             squares: squares,
-        });
+            isMouseDown: true
+        })
     }
+
+    handleMouseUp() {
+        this.setState({
+            isMouseDown: false
+        })
+    }
+
+    // handleClick(i) {
+    //     const squares = this.state.squares.slice();
+    //     squares[i] = {
+    //         bgColor: this.state.colors[this.state.selectedType],
+    //         date: this.state.squares[i].date,
+    //         type: this.state.selectedType
+    //     };
+    //     this.setState({
+    //         squares: squares,
+    //     });
+    // }
 
     handleMouseOver(i) {
         const status = this.state.squares[i].date.toDateString();
-        this.setState({
-            status: status,
-        })
+
+        if (this.state.isMouseDown) {
+            const squares = this.state.squares.slice();
+            squares[i] = {
+                bgColor: this.state.colors[this.state.selectedType],
+                date: this.state.squares[i].date,
+                type: this.state.selectedType
+            };
+            this.setState({
+                squares: squares,
+                status: status
+            });
+        } else {
+            this.setState({
+                status: status
+            })
+        }
     }
 
     handleMouseOut() {
         this.setState({
-            status: '',
+            status: ' ',
+        })
+    }
+
+    handleMouseLeaveBoard() {
+        this.setState({
+            isMouseDown: false
         })
     }
 
@@ -62,36 +105,12 @@ class App extends React.Component {
         })
     }
 
+    handleOnClickGenerateButton() {
+        let generatedCode = generateCode(this.state.squares, this.state.commitsCount);
 
-    render() {
-        return (
-            <div className='app'>
-                <ColorPalette
-                    colors={this.state.colors}
-                    selectedType={this.state.selectedType}
-                    handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
-                />
-
-                <div className='startDate'>
-                    {'Start Date: ' + this.state.startDate}
-                </div>
-
-                <button className='clearButton' onClick={() => this.handleClearClick()}>
-                    Clear
-                </button>
-
-                <Board
-                    squares={this.state.squares}
-                    handleClick={(i) => this.handleClick(i)}
-                    handleMouseOver={(i) => this.handleMouseOver(i)}
-                    handleMouseOut={() => this.handleMouseOut()}
-                />
-
-                <div className='status'>
-                    {this.state.status}
-                </div>
-            </div>
-        )
+        this.setState({
+            generatedCode: generatedCode,
+        });
     }
 
     handleClearClick() {
@@ -108,6 +127,69 @@ class App extends React.Component {
             squares: newSquares,
         });
     }
+
+
+    render() {
+        return (
+            <div className='app' onMouseUp={() => this.handleMouseUp()}>
+                <ColorPalette
+                    colors={this.state.colors}
+                    selectedType={this.state.selectedType}
+                    handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
+                />
+
+                <div className='dates'>
+                    <div className='startDate'>
+                        {'Start Date: ' + this.state.startDate.toDateString()}
+                    </div>
+
+                    <div className='status'>
+                        {'Mouse over: ' + this.state.status}
+                    </div>
+                </div>
+
+
+                <button className='clearButton' onClick={() => this.handleClearClick()}>
+                    Clear
+                </button>
+
+                <button className='generateButton' onClick={() => this.handleOnClickGenerateButton()}>
+                    Generate
+                </button>
+
+                    <Board
+                        squares={this.state.squares}
+                        //handleClick={(i) => this.handleClick(i)}
+                        handleMouseOver={(i) => this.handleMouseOver(i)}
+                        handleMouseOut={(i) => this.handleMouseOut(i)}
+                        handleMouseDown={(i) => this.handleMouseDown(i)}
+                        handleMouseUp={(i) => this.handleMouseUp(i)}
+                        handleMouseLeaveBoard={() => this.handleMouseLeaveBoard()}
+                    />
+
+                <textarea value={this.state.generatedCode}>
+                </textarea>
+            </div>
+        )
+    }
+}
+
+function generateCode(squares, types) {
+    let result = '';
+
+    for (let i = 0; i < squares.length; i += 1) {
+        for (let j = 0; j < types[squares[i].type]; j += 1) {
+            result += getCommandsWindows(squares[i].date);
+        }
+    }
+
+    return result
+}
+
+function getCommandsWindows(date) {
+    let dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T00:01`;
+
+    return `date --rfc-3339='ns' > file.txt \ngit add --all && GIT_AUTHOR_DATE='${dateString}' GIT_COMMITTER_DATE='${dateString}' git commit -m 'Graph Data ${dateString}'\n`
 }
 
 export default App;

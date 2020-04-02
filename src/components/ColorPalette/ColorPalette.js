@@ -6,7 +6,7 @@ function ColorPalette(props){
         let style = {};
         style.backgroundColor = props.colors[i];
 
-        if (i == props.selectedType) {
+        if (i === props.selectedType) {
             style.border = '2px solid black';
         }
 

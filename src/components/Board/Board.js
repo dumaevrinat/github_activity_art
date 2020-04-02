@@ -13,9 +13,10 @@ function Board(props) {
             <Square
                 key={i}
                 style={styles}
-                onClick={() => props.handleClick(i)}
+                //onClick={() => props.handleClick(i)}
                 onMouseOver={() => props.handleMouseOver(i)}
                 onMouseOut={() => props.handleMouseOut(i)}
+                onMouseDown={() => props.handleMouseDown(i)}
                 date={date}
             >
             </Square>
@@ -26,12 +27,12 @@ function Board(props) {
         let weeks = [];
         const weekSize = 7;
 
-        for (let i = 0; i < props.squares.length; i += weekSize){
+        for (let i = 0; i < props.squares.length; i += weekSize) {
             weeks.push(props.squares.slice(i, i + weekSize));
         }
 
         return (
-            <div className='weeks'>
+            <div className='board' onMouseLeave={props.handleMouseLeaveBoard}>
                 {weeks.map((week, weekIndex) =>
                     <div className='week' key={weekIndex}>
                         {week.map((day, dayIndex) =>

@@ -5,17 +5,29 @@
     font-family: FuturaDemiC, sans-serif;
 }
 
-.status {
-}
-
-.startDate {
+.dates {
+    display: flex;
+    flex-direction: row;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.clearButton {
+.status {
+    margin-left: 20px;
+}
+
+.startDate {
+}
+
+.clearButton, .generateButton {
     height: 30px;
     width: 90px;
+    margin-bottom: 10px;
     font-size: medium;
     font-family: FuturaDemiC, sans-serif;
+}
+
+textarea {
+    height: 200px;
+    width: 1100px;
 }
