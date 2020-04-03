@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from './components/Board/Board'
 import ColorPalette from './components/ColorPalette/ColorPalette'
-import './App.css'
+import copy from 'copy-to-clipboard'
 
 class App extends React.Component {
     constructor(props) {
@@ -26,11 +26,11 @@ class App extends React.Component {
             selectedType: 4,
             colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
             commitsCount: [0, 2, 5, 7, 10],
-            status: ' ',
+            selectedDate: undefined,
             startDate: startDate,
             squares: squares,
             generatedCode: undefined,
-            isMouseDown: false
+            isMouseDown: false,
         };
     }
 
@@ -54,20 +54,8 @@ class App extends React.Component {
         })
     }
 
-    // handleClick(i) {
-    //     const squares = this.state.squares.slice();
-    //     squares[i] = {
-    //         bgColor: this.state.colors[this.state.selectedType],
-    //         date: this.state.squares[i].date,
-    //         type: this.state.selectedType
-    //     };
-    //     this.setState({
-    //         squares: squares,
-    //     });
-    // }
-
     handleMouseOverSquare(i) {
-        const status = this.state.squares[i].date.toLocaleDateString();
+        const selectedDate = this.state.squares[i].date;
 
         if (this.state.isMouseDown) {
             const squares = this.state.squares.slice();
@@ -78,18 +66,18 @@ class App extends React.Component {
             };
             this.setState({
                 squares: squares,
-                status: status
+                selectedDate: selectedDate
             });
         } else {
             this.setState({
-                status: status
+                selectedDate: selectedDate
             })
         }
     }
 
     handleMouseOutSquare() {
         this.setState({
-            status: ' ',
+            selectedDate: undefined,
         })
     }
 
@@ -125,49 +113,84 @@ class App extends React.Component {
 
         this.setState({
             squares: newSquares,
+            generatedCode: ''
         });
     }
+
+    handleCopyToClipboard() {
+        copy(this.state.generatedCode)
+    }
+
 
 
     render() {
         return (
             <div className='app' onMouseUp={() => this.handleMouseUp()}>
-                <ColorPalette
-                    colors={this.state.colors}
-                    selectedType={this.state.selectedType}
-                    handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
-                />
 
-                <div className='dates'>
-                    <div className='startDate'>
-                        {'Начальная дата: ' + this.state.startDate.toLocaleDateString()}
+                <div className='settings'>
+                    <div className='colorSettings'>
+                        <ColorPalette
+                            colors={this.state.colors}
+                            selectedType={this.state.selectedType}
+                            handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
+                        />
+
+                        <div className='colorPaletteDescription'>
+                            Цвет
+                        </div>
                     </div>
 
-                    <div className='status'>
-                        {'Выбранная дата: ' + this.state.status}
+                    <div className='dates'>
+                        <div className='date'>
+                            <div className='dateValue'>
+                                {this.state.startDate.toLocaleDateString()}
+                            </div>
+                            <div className='dateDescription'>
+                                Начальная дата
+                            </div>
+                        </div>
+
+                        <div className='date'>
+                            <div className='dateValue'>
+                                {this.state.selectedDate ? this.state.selectedDate.toLocaleDateString() : '...'}
+                            </div>
+                            <div className='dateDescription'>
+                                Выбранная дата
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <Board
+                    squares={this.state.squares}
+                    handleMouseOverSquare={(i) => this.handleMouseOverSquare(i)}
+                    handleMouseOutSquare={(i) => this.handleMouseOutSquare(i)}
+                    handleMouseDownSquare={(i) => this.handleMouseDownSquare(i)}
+                    handleMouseLeaveBoard={() => this.handleMouseLeaveBoard()}
+                />
 
-                <button className='clearButton' onClick={() => this.handleOnClickClearButton()}>
-                    Очистить
-                </button>
+                <div className='boardButtons'>
+                    <button className='clearButton' onClick={() => this.handleOnClickClearButton()}>
+                        Очистить
+                    </button>
 
-                <button className='generateButton' onClick={() => this.handleOnClickGenerateButton()}>
-                    Сгенерировать
-                </button>
+                    <button className='generateButton' onClick={() => this.handleOnClickGenerateButton()}>
+                        Сгенерировать
+                    </button>
 
-                    <Board
-                        squares={this.state.squares}
-                        //handleClick={(i) => this.handleClick(i)}
-                        handleMouseOverSquare={(i) => this.handleMouseOverSquare(i)}
-                        handleMouseOutSquare={(i) => this.handleMouseOutSquare(i)}
-                        handleMouseDownSquare={(i) => this.handleMouseDownSquare(i)}
-                        handleMouseLeaveBoard={() => this.handleMouseLeaveBoard()}
-                    />
+                    <button className='copyButton' onClick={() => this.handleCopyToClipboard()}>
+                        Скопировать
+                    </button>
+                </div>
 
-                <textarea value={this.state.generatedCode}>
-                </textarea>
+                <div className='generatedCodeContainer'>
+                    <textarea
+                        className='generatedCode'
+                        value={this.state.generatedCode}
+                        readOnly
+                        disabled={true}>
+                    </textarea>
+                </div>
             </div>
         )
     }

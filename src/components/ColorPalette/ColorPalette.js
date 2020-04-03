@@ -5,14 +5,10 @@ function ColorPalette(props){
         let style = {};
         style.backgroundColor = props.colors[i];
 
-        if (i === props.selectedType) {
-            style.border = '2px solid black';
-        }
-
         return (
             <button
                 key={i}
-                className='colorButton'
+                className={i === props.selectedType ? 'colorSelectedButton': 'colorButton'}
                 style={style}
                 onClick={() => props.handleOnClickColorButton(i)}>
 
