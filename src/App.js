@@ -34,7 +34,7 @@ class App extends React.Component {
         };
     }
 
-    handleMouseDown(i) {
+    handleMouseDownSquare(i) {
         const squares = this.state.squares.slice();
         squares[i] = {
             bgColor: this.state.colors[this.state.selectedType],
@@ -66,8 +66,8 @@ class App extends React.Component {
     //     });
     // }
 
-    handleMouseOver(i) {
-        const status = this.state.squares[i].date.toDateString();
+    handleMouseOverSquare(i) {
+        const status = this.state.squares[i].date.toLocaleDateString();
 
         if (this.state.isMouseDown) {
             const squares = this.state.squares.slice();
@@ -87,7 +87,7 @@ class App extends React.Component {
         }
     }
 
-    handleMouseOut() {
+    handleMouseOutSquare() {
         this.setState({
             status: ' ',
         })
@@ -113,7 +113,7 @@ class App extends React.Component {
         });
     }
 
-    handleClearClick() {
+    handleOnClickClearButton() {
         const squares = this.state.squares.slice();
         const newSquares = squares.map((square) => {
                 return {
@@ -140,30 +140,29 @@ class App extends React.Component {
 
                 <div className='dates'>
                     <div className='startDate'>
-                        {'Start Date: ' + this.state.startDate.toDateString()}
+                        {'Начальная дата: ' + this.state.startDate.toLocaleDateString()}
                     </div>
 
                     <div className='status'>
-                        {'Mouse over: ' + this.state.status}
+                        {'Выбранная дата: ' + this.state.status}
                     </div>
                 </div>
 
 
-                <button className='clearButton' onClick={() => this.handleClearClick()}>
-                    Clear
+                <button className='clearButton' onClick={() => this.handleOnClickClearButton()}>
+                    Очистить
                 </button>
 
                 <button className='generateButton' onClick={() => this.handleOnClickGenerateButton()}>
-                    Generate
+                    Сгенерировать
                 </button>
 
                     <Board
                         squares={this.state.squares}
                         //handleClick={(i) => this.handleClick(i)}
-                        handleMouseOver={(i) => this.handleMouseOver(i)}
-                        handleMouseOut={(i) => this.handleMouseOut(i)}
-                        handleMouseDown={(i) => this.handleMouseDown(i)}
-                        handleMouseUp={(i) => this.handleMouseUp(i)}
+                        handleMouseOverSquare={(i) => this.handleMouseOverSquare(i)}
+                        handleMouseOutSquare={(i) => this.handleMouseOutSquare(i)}
+                        handleMouseDownSquare={(i) => this.handleMouseDownSquare(i)}
                         handleMouseLeaveBoard={() => this.handleMouseLeaveBoard()}
                     />
 

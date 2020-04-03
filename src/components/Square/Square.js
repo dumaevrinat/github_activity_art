@@ -1,14 +1,13 @@
 import React from "react";
-import './Square.css'
 
 function Square(props) {
     return (
         <button
             className="square"
             //onClick={props.onClick}
-            onMouseOver={props.onMouseOver}
-            onMouseOut={props.onMouseOut}
-            onMouseDown={props.onMouseDown}
+            onMouseOver={props.onMouseOverSquare}
+            onMouseOut={props.onMouseOutSquare}
+            onMouseDown={props.onMouseDownSquare}
             style={props.style}
             date={props.date}
         >

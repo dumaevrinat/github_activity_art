@@ -1,6 +1,5 @@
 import React from 'react'
 import Square from '../Square/Square'
-import './Board.css'
 
 
 function Board(props) {
@@ -14,9 +13,9 @@ function Board(props) {
                 key={i}
                 style={styles}
                 //onClick={() => props.handleClick(i)}
-                onMouseOver={() => props.handleMouseOver(i)}
-                onMouseOut={() => props.handleMouseOut(i)}
-                onMouseDown={() => props.handleMouseDown(i)}
+                onMouseOverSquare={() => props.handleMouseOverSquare(i)}
+                onMouseOutSquare={() => props.handleMouseOutSquare(i)}
+                onMouseDownSquare={() => props.handleMouseDownSquare(i)}
                 date={date}
             >
             </Square>

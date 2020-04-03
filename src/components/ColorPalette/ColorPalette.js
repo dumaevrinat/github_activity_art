@@ -1,5 +1,4 @@
 import React from 'react';
-import './ColorPalette.css';
 
 function ColorPalette(props){
     const renderColorButton = (i) => {
