@@ -90,7 +90,7 @@ h3 {
 
 .boardTemplate {
     padding: 0.6em 1em 0.6em 1em;
-    margin: 1em;
+    margin: 1em 0 1em 1em;
     background-color: #ffffff;
     color: #383838;
     border: 0.15em solid #383838;

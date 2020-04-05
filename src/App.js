@@ -145,7 +145,7 @@ class App extends React.Component {
     render() {
         return (
             <div className='app' onMouseUp={() => this.handleMouseUp()}>
-                <h3>Шаблоны</h3>
+                <h3>Примеры</h3>
 
                 <BoardTemplatesCarousel
                     boardTemplates={this.state.boardTemplates}
