@@ -5,20 +5,16 @@ import Square from '../Square/Square'
 function Board(props) {
     const renderSquare = (i) => {
         let styles = {};
-        let date = props.squares[i].date;
-        styles.backgroundColor = props.squares[i].bgColor;
+        styles.backgroundColor = props.colors[props.squares[i].type];
 
         return (
             <Square
                 key={i}
                 style={styles}
-                //onClick={() => props.handleClick(i)}
                 onMouseOverSquare={() => props.handleMouseOverSquare(i)}
                 onMouseOutSquare={() => props.handleMouseOutSquare(i)}
                 onMouseDownSquare={() => props.handleMouseDownSquare(i)}
-                date={date}
-            >
-            </Square>
+            />
         )
     };
 
@@ -44,9 +40,9 @@ function Board(props) {
     };
 
     return (
-        <div>
+        <>
             {renderWeeks()}
-        </div>
+        </>
     )
 }
 

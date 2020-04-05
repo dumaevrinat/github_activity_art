@@ -32,16 +32,26 @@ button {
     color: #fff;
     background-color: #72CBC8;
     border-radius: 0.4em;
-    transition: filter .2s;
+    transition: filter .2s, scale .2s;
+    transition-timing-function: ease-in-out;
+}
+
+button:hover {
+    filter: brightness(0.9);
 }
 
 button:active {
-    filter: brightness(0.8);
+    transform: scale(0.97);
 }
+
 
 header {
     flex-direction: row;
     background-color: #72CBC8;
+}
+
+h3 {
+    margin: 1.5em 1em 0 1em;
 }
 
 .container {
@@ -67,11 +77,33 @@ header {
     padding: 1em;
 }
 
+.boardTemplatesCarousel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: auto;
+    margin: 1em;
+    background-color: #ffffff;
+    border-radius: 0.4em;
+}
+
+.boardTemplate {
+    padding: 0.6em 1em 0.6em 1em;
+    margin: 1em;
+    background-color: #ffffff;
+    color: #383838;
+    border: 0.15em solid #383838;
+    border-radius: 0.4em;
+    white-space: nowrap;
+}
+
 .settings {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
+    align-items: flex-end;
     margin: 1em;
     padding: 1em;
     background-color: #ffffff;
@@ -82,7 +114,6 @@ header {
     display: flex;
     flex-direction: column;
     margin-right: 1em;
-    margin-bottom: 1em;
 }
 
 
@@ -146,7 +177,7 @@ header {
     border-radius: 0.4em;
 }
 
-.generatedCode::-webkit-scrollbar, .board::-webkit-scrollbar {
+.generatedCode::-webkit-scrollbar, .board::-webkit-scrollbar, .boardTemplatesCarousel::-webkit-scrollbar {
     height: 0.5em;
     width: 0.5em;
     background-color: #ffffff;
@@ -154,7 +185,7 @@ header {
     border-radius: 0.4em;
 }
 
-.generatedCode::-webkit-scrollbar-thumb, .board::-webkit-scrollbar-thumb {
+.generatedCode::-webkit-scrollbar-thumb, .board::-webkit-scrollbar-thumb, .boardTemplatesCarousel::-webkit-scrollbar-thumb {
     height: 0.5em;
     width: 0.5em;
     background-color: #383838;

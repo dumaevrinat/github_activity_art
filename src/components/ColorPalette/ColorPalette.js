@@ -17,7 +17,7 @@ function ColorPalette(props){
     };
 
     return (
-        <div className='colorPanel'>
+        <div className='colorPalette'>
             {props.colors.map((color, index) =>
                 renderColorButton(index)
             )}

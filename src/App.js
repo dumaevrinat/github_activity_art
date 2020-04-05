@@ -1,7 +1,9 @@
 import React from 'react';
 import Board from './components/Board/Board'
 import ColorPalette from './components/ColorPalette/ColorPalette'
+import BoardTemplatesCarousel from './components/BoardTemplatesCarousel/BoardTemplatesCarousel'
 import copy from 'copy-to-clipboard'
+import boardTemplates from './boardTemplatesData'
 
 class App extends React.Component {
     constructor(props) {
@@ -16,7 +18,6 @@ class App extends React.Component {
             let dayDate = new Date(startDate);
             dayDate.setDate(dayDate.getDate() + i);
             squares[i] = {
-                bgColor: '#ebedf0',
                 date: dayDate,
                 type: 0,
             }
@@ -31,13 +32,13 @@ class App extends React.Component {
             squares: squares,
             generatedCode: undefined,
             isMouseDown: false,
+            boardTemplates: boardTemplates
         };
     }
 
     handleMouseDownSquare(i) {
         const squares = this.state.squares.slice();
         squares[i] = {
-            bgColor: this.state.colors[this.state.selectedType],
             date: this.state.squares[i].date,
             type: this.state.selectedType
         };
@@ -60,7 +61,6 @@ class App extends React.Component {
         if (this.state.isMouseDown) {
             const squares = this.state.squares.slice();
             squares[i] = {
-                bgColor: this.state.colors[this.state.selectedType],
                 date: this.state.squares[i].date,
                 type: this.state.selectedType
             };
@@ -95,7 +95,6 @@ class App extends React.Component {
 
     handleOnClickGenerateButton() {
         let generatedCode = generateCode(this.state.squares, this.state.commitsCount);
-
         this.setState({
             generatedCode: generatedCode,
         });
@@ -105,8 +104,8 @@ class App extends React.Component {
         const squares = this.state.squares.slice();
         const newSquares = squares.map((square) => {
                 return {
-                    bgColor: this.state.colors[0],
-                    date: square.date
+                    date: square.date,
+                    type: 0
                 };
             }
         );
@@ -121,11 +120,34 @@ class App extends React.Component {
         copy(this.state.generatedCode)
     }
 
+    handleOnClickBoardTemplate(i) {
+        const squares = this.state.squares.slice();
+        const templateSquaresTypes = this.state.boardTemplates[i].squaresTypes;
 
+        const newSquares = squares.map((square, index) => {
+                return {
+                    date: square.date,
+                    type: templateSquaresTypes[index]
+                };
+            }
+        );
+
+        this.setState({
+            squares: newSquares
+        })
+    }
 
     render() {
         return (
             <div className='app' onMouseUp={() => this.handleMouseUp()}>
+                <h3>Шаблоны</h3>
+
+                <BoardTemplatesCarousel
+                    boardTemplates={this.state.boardTemplates}
+                    handleOnClickBoardTemplate={(i) => this.handleOnClickBoardTemplate(i)}
+                />
+
+                <h3>Настройки</h3>
 
                 <div className='settings'>
                     <div className='colorSettings'>
@@ -163,6 +185,7 @@ class App extends React.Component {
 
                 <Board
                     squares={this.state.squares}
+                    colors={this.state.colors}
                     handleMouseOverSquare={(i) => this.handleMouseOverSquare(i)}
                     handleMouseOutSquare={(i) => this.handleMouseOutSquare(i)}
                     handleMouseDownSquare={(i) => this.handleMouseDownSquare(i)}
@@ -182,6 +205,8 @@ class App extends React.Component {
                         Скопировать
                     </button>
                 </div>
+
+                <h3>Скрипт</h3>
 
                 <div className='generatedCodeContainer'>
                     <textarea
