@@ -95,6 +95,11 @@ class App extends React.Component {
 
     handleOnClickGenerateButton() {
         let generatedCode = generateCode(this.state.squares, this.state.commitsCount);
+
+        // let generatedArrayString = this.state.squares.map((square) => {
+        //     return square.type
+        // });
+
         this.setState({
             generatedCode: generatedCode,
         });
