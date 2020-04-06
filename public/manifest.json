@@ -1,7 +1,16 @@
 {
   "short_name": "GitHub Activity Art",
   "name": "GitHub Activity Art",
-  "icons": [],
+  "icons": [
+    {
+      "src": "icons/icon32.jpg",
+      "sizes": "32x32"
+    },
+    {
+      "src": "icons/icon256.jpg",
+      "sizes": "72x72 96x96 128x128 256x256"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff"
