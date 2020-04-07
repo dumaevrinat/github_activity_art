@@ -23,6 +23,8 @@ class App extends React.Component {
             }
         }
 
+        console.log(boardTemplates);
+
         this.state = {
             selectedType: 4,
             colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
@@ -94,7 +96,7 @@ class App extends React.Component {
     }
 
     handleOnClickGenerateButton() {
-        let generatedCode = generateCode(this.state.squares, this.state.commitsCount);
+        let generatedCode = generateCode(this.state.squares, this.state.commitsCount, getCommandsWindows);
 
         // let generatedArrayString = this.state.squares.map((square) => {
         //     return square.type
@@ -226,12 +228,12 @@ class App extends React.Component {
     }
 }
 
-function generateCode(squares, types) {
+function generateCode(squares, types, func) {
     let result = '';
 
     for (let i = 0; i < squares.length; i += 1) {
         for (let j = 0; j < types[squares[i].type]; j += 1) {
-            result += getCommandsWindows(squares[i].date);
+            result += func(squares[i].date);
         }
     }
 

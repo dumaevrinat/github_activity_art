@@ -54,6 +54,20 @@ h3 {
     margin: 1.5em 1em 0 1em;
 }
 
+a {
+    text-decoration: none;
+    font-family: 'Product Sans Bold', sans-serif;
+    color: #383838;
+}
+
+a:hover {
+    filter: brightness(0.4);
+}
+
+a:active {
+    filter: brightness(0.8);
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -232,7 +246,8 @@ h3 {
 
 .generatedCode {
     width: 100%;
-    height: 20em;
+    height: 16em;
+    padding: 0;
     background-color: #ffffff;
     outline: none;
     resize: none;
@@ -240,4 +255,28 @@ h3 {
     font-size: 1em;
     border: 0 solid #383838;
     border-radius: 0.4em;
+}
+
+.publication {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 0.4em;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 4em;
+    background-color: #72CBC8;
+    margin-top: 2em;
 }
