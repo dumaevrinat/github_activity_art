@@ -23,13 +23,12 @@ class App extends React.Component {
             }
         }
 
-        console.log(boardTemplates);
-
         this.state = {
-            selectedType: 4,
-            colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
-            commitsCount: [0, 2, 5, 7, 10],
+            selectedType: 1,
             selectedDate: undefined,
+            selectedOS: 0,
+            colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
+            maxCommitCount: 10,
             startDate: startDate,
             squares: squares,
             generatedCode: undefined,
@@ -96,11 +95,16 @@ class App extends React.Component {
     }
 
     handleOnClickGenerateButton() {
-        let generatedCode = generateCode(this.state.squares, this.state.commitsCount, getCommandsWindows);
+        let generatedCode;
 
-        // let generatedArrayString = this.state.squares.map((square) => {
-        //     return square.type
-        // });
+        switch (this.state.selectedOS) {
+            case 0:
+                generatedCode = generateCode(this.state.squares, this.state.maxCommitCount, getCommandsWindows);
+                break;
+            case 1:
+                generatedCode = generateCode(this.state.squares, this.state.maxCommitCount, getCommandsLinux);
+                break;
+        }
 
         this.setState({
             generatedCode: generatedCode,
@@ -144,6 +148,20 @@ class App extends React.Component {
         })
     }
 
+    handleOnChangeOSInput(event) {
+        let value = parseInt(event.target.value);
+
+        this.setState({
+            selectedOS: value
+        })
+    }
+
+    handleOnInputMaxCommitCount(event) {
+        this.setState({
+            maxCommitCount: event.target.value
+        })
+    }
+
     render() {
         return (
             <div className='app' onMouseUp={() => this.handleMouseUp()}>
@@ -164,17 +182,46 @@ class App extends React.Component {
                             handleOnClickColorButton={(i) => this.handleOnClickColorButton(i)}
                         />
 
-                        <div className='colorPaletteDescription'>
+                        <div className='settingsDescription'>
                             Цвет
                         </div>
                     </div>
 
-                    <div className='dates'>
+                    <div className='maxCommitSettings'>
+                        <input
+                            className='maxCommitInput'
+                            type='number'
+                            defaultValue={this.state.maxCommitCount}
+                            max={100}
+                            min={10}
+                            step={1}
+                            onInput={(event) => this.handleOnInputMaxCommitCount(event)}
+                        />
+                        <div className='settingsDescription'>
+                            Максимальное кол-во коммитов
+                        </div>
+                    </div>
+
+                    <div className='OSSettings'>
+                        <select
+                            value={this.state.selectedOS}
+                            className='OSSelect'
+                            onChange={(event) => this.handleOnChangeOSInput(event)}
+                        >
+                            <option value={0}>windows</option>
+                            <option value={1}>linux & macos</option>
+                        </select>
+                        <div className='settingsDescription'>
+                            Операционная система
+                        </div>
+                    </div>
+
+                    <div className='dateSettings'>
                         <div className='date'>
                             <div className='dateValue'>
                                 {this.state.startDate.toLocaleDateString()}
                             </div>
-                            <div className='dateDescription'>
+                            <div className='settingsDescription'>
                                 Начальная дата
                             </div>
                         </div>
@@ -183,7 +230,7 @@ class App extends React.Component {
                             <div className='dateValue'>
                                 {this.state.selectedDate ? this.state.selectedDate.toLocaleDateString() : '...'}
                             </div>
-                            <div className='dateDescription'>
+                            <div className='settingsDescription'>
                                 Выбранная дата
                             </div>
                         </div>
@@ -228,11 +275,21 @@ class App extends React.Component {
     }
 }
 
-function generateCode(squares, types, func) {
+function generateCode(squares, maxCommitCount, func) {
     let result = '';
 
+    if (maxCommitCount > 100) {
+        maxCommitCount = 100;
+    }
+
+    if (maxCommitCount < 10) {
+        maxCommitCount = 10;
+    }
+
     for (let i = 0; i < squares.length; i += 1) {
-        for (let j = 0; j < types[squares[i].type]; j += 1) {
+        let commitCount = Math.floor((squares[i].type / 4) * maxCommitCount);
+
+        for (let j = 0; j < commitCount; j += 1) {
             result += func(squares[i].date);
         }
     }
@@ -244,6 +301,13 @@ function getCommandsWindows(date) {
     let dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T00:01`;
 
     return `date --rfc-3339='ns' > file.txt \ngit add --all && GIT_AUTHOR_DATE='${dateString}' GIT_COMMITTER_DATE='${dateString}' git commit -m 'Graph Data ${dateString}'\n`
+}
+
+function getCommandsLinux(date) {
+    let dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T00:01`;
+
+    return `cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1 > file.txt \ngit add --all && GIT_AUTHOR_DATE='${dateString}' GIT_COMMITTER_DATE='${dateString}' git commit -m 'Graph Data ${dateString}'\n`
+
 }
 
 export default App;

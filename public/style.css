@@ -44,6 +44,30 @@ button:active {
     transform: scale(0.97);
 }
 
+input {
+    height: 1.5em;
+    border: 0;
+    outline: none;
+    font-family: 'Product Sans Regular', sans-serif;
+    font-size: 1em;
+    background-color: #F8F8FA;
+    padding: 0.25em 0.25em;
+    margin-bottom: 0.25em;
+    border-radius: 0.4em;
+}
+
+select {
+    height: 2em;
+    border: 0;
+    outline: none;
+    font-family: 'Product Sans Regular', sans-serif;
+    font-size: 1em;
+    background-color: #F8F8FA;
+    padding: 0.25em 0.25em;
+    margin-bottom: 0.25em;
+    border-radius: 0.4em;
+}
+
 
 header {
     flex-direction: row;
@@ -57,15 +81,21 @@ h3 {
 a {
     text-decoration: none;
     font-family: 'Product Sans Bold', sans-serif;
-    color: #383838;
+    color: #ffffff;
 }
 
 a:hover {
-    filter: brightness(0.4);
+    filter: brightness(0.95);
 }
 
 a:active {
-    filter: brightness(0.8);
+    filter: brightness(0.9);
+}
+
+pre {
+    background-color: #F8F8FA;
+    border-radius: 0.4em;
+    padding: 0.25em 0.25em;
 }
 
 .container {
@@ -136,48 +166,51 @@ a:active {
     align-items: center;
 }
 
-.colorPaletteDescription {
+.settingsDescription {
     font-family: 'Product Sans Bold', sans-serif;
 }
 
 .colorButton {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     margin: 0.2em 0.2em 0.2em 0;
     padding: 0 0 0 0;
     border: 0.15em solid transparent;
 }
 
 .colorSelectedButton {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     margin: 0.2em 0.2em 0.2em 0;
     padding: 0 0 0 0;
     border: 0.15em solid #383838;
 }
 
+.maxCommitSettings {
+    margin-right: 1em;
+}
 
-.dates {
+.OSSettings {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1em;
+}
+
+.dateSettings {
     display: flex;
     flex-direction: row;
+    margin-right: 1em;
 }
 
 .date {
     flex-direction: column;
     align-items: center;
     margin-right: 1em;
-    border-radius: 0.4em;
-    background-color: #ffffff;
-
 }
 
 .dateValue {
     font-size: 1.5em;
     color: #3DCED7;
-}
-
-.dateDescription {
-    font-family: 'Product Sans Bold', sans-serif;
 }
 
 .board {
@@ -236,18 +269,16 @@ a:active {
 .copyButton {
 }
 
-.copyStatus {
-    transition: opacity 0.5s;
-}
 
 .generatedCodeContainer {
     margin: 1em;
 }
 
 .generatedCode {
+    box-sizing: border-box;
     width: 100%;
     height: 16em;
-    padding: 0;
+    padding: 1em 1em;
     background-color: #ffffff;
     outline: none;
     resize: none;

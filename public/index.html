@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/png" href="./icons/icon256.jpg">
     <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="media-queries.css">
     <title>GitHub Activity Art</title>
 </head>
 <body>
@@ -36,14 +34,14 @@
                 Создайте репозиторий на GitHub.
             </li>
             <li>
-                Создайте локальный репозиторий и добавьте удаленный репозиторий.
-                <pre>mkdir {PROJECT NAME} && cd {PROJECT NAME}<br>git remote add origin https://github.com/{USERNAME}/{REPOSITORY NAME}.git</pre>
+                Склонируйте репозиторий:
+                <pre>git clone https://github.com/{USERNAME}/{REPOSITORY NAME}.git</pre>
             </li>
             <li>
                 Запустите сгенерированный скрипт.
             </li>
             <li>
-                Занесите все изменения, которые были сделаны в локальном репозитории на GitHub.
+                Занесите все изменения, которые были сделаны в локальном репозитории, на GitHub:
                 <pre>git push -u origin master</pre>
             </li>
         </ul>
