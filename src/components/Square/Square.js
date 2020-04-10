@@ -1,16 +1,20 @@
-import React from "react";
+import React, {useContext} from "react"
+import Context from '../../context'
 
-function Square(props) {
+export default function Square({index, style}) {
+    const {paintSquareAndSetSelectedDate, paintSquare, setIsMouseDown, setSelectedDate} = useContext(Context);
+
     return (
         <button
             className="square"
-            onMouseOver={props.onMouseOverSquare}
-            onMouseOut={props.onMouseOutSquare}
-            onMouseDown={props.onMouseDownSquare}
-            style={props.style}
+            onMouseOver={() => paintSquareAndSetSelectedDate(index)}
+            onMouseOut={() => setSelectedDate(undefined)}
+            onMouseDown={() => {
+                paintSquare(index);
+                setIsMouseDown(true);
+            }}
+            style={style}
         >
         </button>
     )
 }
-
-export default Square;

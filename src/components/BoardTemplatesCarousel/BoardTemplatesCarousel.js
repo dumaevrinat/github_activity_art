@@ -1,18 +1,16 @@
 import React from 'react';
 import BoardTemplate from '../BoardTemplate/BoardTemplate'
 
-function BoardTemplatesCarousel(props) {
+export default function BoardTemplatesCarousel({boardTemplates}) {
     return (
         <div className='boardTemplatesCarousel'>
-            {props.boardTemplates.map((template, index) =>
+            {boardTemplates.map((template, index) =>
                 <BoardTemplate
                     key={index}
                     name = {template.name}
-                    onClick={() => props.handleOnClickBoardTemplate(index)}
+                    index={index}
                 />
             )}
         </div>
     )
 }
-
-export default BoardTemplatesCarousel;

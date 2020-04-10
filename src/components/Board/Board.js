@@ -1,49 +1,31 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import Context from '../../context'
 import Square from '../Square/Square'
 
 
-function Board(props) {
-    const renderSquare = (i) => {
-        let styles = {};
-        styles.backgroundColor = props.colors[props.squares[i].type];
+export default function Board({squares, colors}) {
+    const {setIsMouseDown} = useContext(Context);
 
-        return (
-            <Square
-                key={i}
-                style={styles}
-                onMouseOverSquare={() => props.handleMouseOverSquare(i)}
-                onMouseOutSquare={() => props.handleMouseOutSquare(i)}
-                onMouseDownSquare={() => props.handleMouseDownSquare(i)}
-            />
-        )
-    };
+    let weeks = [];
+    const weekSize = 7;
 
-    const renderWeeks = () => {
-        let weeks = [];
-        const weekSize = 7;
-
-        for (let i = 0; i < props.squares.length; i += weekSize) {
-            weeks.push(props.squares.slice(i, i + weekSize));
-        }
-
-        return (
-            <div className='board' onMouseLeave={props.handleMouseLeaveBoard}>
-                {weeks.map((week, weekIndex) =>
-                    <div className='week' key={weekIndex}>
-                        {week.map((day, dayIndex) =>
-                            renderSquare(weekIndex * weekSize + dayIndex)
-                        )}
-                    </div>
-                )}
-            </div>
-        )
-    };
+    for (let i = 0; i < squares.length; i += weekSize) {
+        weeks.push(squares.slice(i, i + weekSize));
+    }
 
     return (
-        <>
-            {renderWeeks()}
-        </>
+        <div className='board' onMouseLeave={() => setIsMouseDown(false)}>
+            {weeks.map((week, weekIndex) =>
+                <div className='week' key={weekIndex}>
+                    {week.map((day, dayIndex) =>
+                        <Square
+                            key={weekIndex * weekSize + dayIndex}
+                            index={weekIndex * weekSize + dayIndex}
+                            style={{backgroundColor: colors[squares[weekIndex * weekSize + dayIndex].type]}}
+                        />
+                    )}
+                </div>
+            )}
+        </div>
     )
 }
-
-export default Board;
