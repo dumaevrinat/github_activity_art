@@ -3,7 +3,7 @@ import BoardTemplate from '../BoardTemplate/BoardTemplate'
 
 export default function BoardTemplatesCarousel({boardTemplates}) {
     return (
-        <div className='boardTemplatesCarousel'>
+        <div className='block boardTemplatesCarousel'>
             {boardTemplates.map((template, index) =>
                 <BoardTemplate
                     key={index}

@@ -14,7 +14,7 @@ export default function Board({squares, colors}) {
     }
 
     return (
-        <div className='board' onMouseLeave={() => setIsMouseDown(false)}>
+        <div className='block board' onMouseLeave={() => setIsMouseDown(false)}>
             {weeks.map((week, weekIndex) =>
                 <div className='week' key={weekIndex}>
                     {week.map((day, dayIndex) => {

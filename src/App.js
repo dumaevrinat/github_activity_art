@@ -139,7 +139,7 @@ export default function App() {
                 </div>
 
                 <h3>Скрипт</h3>
-                <div className='generatedCodeContainer'>
+                <div className='block'>
                     <textarea
                         className='generatedCode'
                         value={generatedCode}

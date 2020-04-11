@@ -6,7 +6,7 @@ export default function Settings({selectedType, colors, maxCommitCount, selected
     const {setMaxCommitCount, setSelectedOS} = useContext(Context);
 
     return (
-        <div className='settings'>
+        <div className='block settings'>
             <div className='colorSettings'>
                 <ColorPalette
                     colors={colors}
