@@ -1,28 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import Context from '../../context'
 
-function ColorPalette(props){
-    const renderColorButton = (i) => {
-        let style = {};
-        style.backgroundColor = props.colors[i];
-
-        return (
-            <button
-                key={i}
-                className={i === props.selectedType ? 'colorSelectedButton': 'colorButton'}
-                style={style}
-                onClick={() => props.handleOnClickColorButton(i)}>
-
-            </button>
-        )
-    };
+export default function ColorPalette({colors, selectedType}){
+    const {setSelectedType} = useContext(Context);
 
     return (
         <div className='colorPalette'>
-            {props.colors.map((color, index) =>
-                renderColorButton(index)
+            {colors.map((color, index) =>
+                <button
+                    key={index}
+                    className={index === selectedType ? 'colorSelectedButton': 'colorButton'}
+                    style={{backgroundColor: colors[index]}}
+                    onClick={() => setSelectedType(index)}>
+                </button>
             )}
         </div>
     )
 }
 
-export default ColorPalette;

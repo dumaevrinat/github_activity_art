@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import Context from '../../context'
 
-function BoardTemplate(props) {
+export default function BoardTemplate({name, index}) {
+    const {setBoardTemplate} = useContext(Context);
+
     return (
         <button
             className='boardTemplate'
-            onClick={props.onClick}
+            onClick={() => setBoardTemplate(index)}
         >
-            {props.name}
+            {name}
         </button>
     )
 }
-
-export default BoardTemplate;
