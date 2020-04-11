@@ -17,12 +17,17 @@ export default function Board({squares, colors}) {
         <div className='board' onMouseLeave={() => setIsMouseDown(false)}>
             {weeks.map((week, weekIndex) =>
                 <div className='week' key={weekIndex}>
-                    {week.map((day, dayIndex) =>
-                        <Square
-                            key={weekIndex * weekSize + dayIndex}
-                            index={weekIndex * weekSize + dayIndex}
-                            style={{backgroundColor: colors[squares[weekIndex * weekSize + dayIndex].type]}}
-                        />
+                    {week.map((day, dayIndex) => {
+                        const index = weekIndex * weekSize + dayIndex;
+                        return (
+                            <Square
+                                key={index}
+                                index={index}
+                                date={squares[index].date}
+                                style={{backgroundColor: colors[squares[index].type]}}
+                            />
+                        )
+                    }
                     )}
                 </div>
             )}

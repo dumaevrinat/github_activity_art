@@ -14,12 +14,13 @@ export default function App() {
     const date = new Date();
     date.setDate(date.getDate() - 365 - date.getDay() + 1);
 
+    const startDate = date;
+    const colors= ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
+
     const [selectedType, setSelectedType] = useState(1);
     const [selectedDate, setSelectedDate] = useState(undefined);
     const [selectedOS, setSelectedOS] = useState(0);
-    const [colors, setColors] = useState(['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']);
     const [maxCommitCount, setMaxCommitCount] = useState(10);
-    const [startDate, setStartDate] = useState(date);
     const [squares, setSquares] = useState(getSquares(date));
     const [generatedCode, setGeneratedCode] = useState(undefined);
     const [isMouseDown, setIsMouseDown] = useState(false);
@@ -32,6 +33,12 @@ export default function App() {
         };
 
         setSquares(newSquares);
+    };
+
+    const paintSquareContinuously = (i) => {
+        if (isMouseDown) {
+            paintSquare(i);
+        }
     };
 
     const paintSquareAndSetSelectedDate = (i) => {
@@ -87,13 +94,13 @@ export default function App() {
 
     return (
         <Context.Provider value={{
-            setBoardTemplate,
             setSelectedType,
             setSelectedDate,
             setSelectedOS,
             setMaxCommitCount,
             setIsMouseDown,
-            paintSquareAndSetSelectedDate,
+            setBoardTemplate,
+            paintSquareContinuously,
             paintSquare
         }}>
             <div className='app' onMouseUp={() => setIsMouseDown(false)}>
