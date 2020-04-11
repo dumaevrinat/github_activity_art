@@ -15,7 +15,8 @@ export default function App() {
     date.setDate(date.getDate() - 365 - date.getDay() + 1);
 
     const startDate = date;
-    const colors= ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
+    const colors = ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
+    const OSCommands = [getCommandsWindows, getCommandsLinux];
 
     const [selectedType, setSelectedType] = useState(1);
     const [selectedDate, setSelectedDate] = useState(undefined);
@@ -27,11 +28,7 @@ export default function App() {
 
     const paintSquare = (i) => {
         const newSquares = squares.slice();
-        newSquares[i] = {
-            date: squares[i].date,
-            type: selectedType
-        };
-
+        newSquares[i].type = selectedType;
         setSquares(newSquares);
     };
 
@@ -41,25 +38,12 @@ export default function App() {
         }
     };
 
-    const paintSquareAndSetSelectedDate = (i) => {
-        const selectedDate = squares[i].date;
-
-        if (isMouseDown) {
-            paintSquare(i);
-            setSelectedDate(selectedDate);
-        } else {
-            setSelectedDate(selectedDate);
-        }
-    };
-
     const setBoardTemplate = (i) => {
         const templateSquaresTypes = boardTemplates[i].squaresTypes;
 
-        const newSquares = squares.slice().map((square, index) => {
-                return {
-                    date: square.date,
-                    type: templateSquaresTypes[index]
-                };
+        const newSquares = squares.map((square, index) => {
+                square.type = templateSquaresTypes[index];
+                return square;
             }
         );
 
@@ -67,11 +51,9 @@ export default function App() {
     };
 
     const clearBoard = () => {
-        const newSquares = squares.slice().map((square) => {
-                return {
-                    date: square.date,
-                    type: 0
-                };
+        const newSquares = squares.map((square) => {
+                square.type = 0;
+                return square;
             }
         );
 
@@ -79,16 +61,7 @@ export default function App() {
     };
 
     const generateScript = () => {
-        let generatedCode;
-
-        switch (selectedOS) {
-            case 0:
-                generatedCode = generateCode(squares, maxCommitCount, getCommandsWindows);
-                break;
-            case 1:
-                generatedCode = generateCode(squares, maxCommitCount, getCommandsLinux);
-                break;
-        }
+        const generatedCode = generateCode(squares, maxCommitCount, OSCommands[selectedOS]);
         setGeneratedCode(generatedCode);
     };
 
