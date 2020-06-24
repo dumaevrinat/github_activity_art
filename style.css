@@ -115,7 +115,7 @@ footer {
     align-items: center;
     justify-content: center;
     height: 4em;
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-background-default);
     margin-top: 2em;
 }
 
