@@ -50,7 +50,7 @@ export default function App() {
         setSquares(newSquares);
     };
 
-    const clearBoard = () => {
+    const clear = () => {
         const newSquares = squares.map((square) => {
                 square.type = 0;
                 return square;
@@ -58,6 +58,7 @@ export default function App() {
         );
 
         setSquares(newSquares);
+        setGeneratedCode('');
     };
 
     const generateScript = () => {
@@ -106,7 +107,7 @@ export default function App() {
                         Скопировать
                     </button>
 
-                    <button className='clearButton' onClick={() => clearBoard()}>
+                    <button className='clearButton' onClick={() => clear()}>
                         Очистить
                     </button>
                 </div>
