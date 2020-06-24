@@ -15,7 +15,7 @@ export default function App() {
     date.setDate(date.getDate() - 365 - date.getDay() + 1);
 
     const startDate = date;
-    const colors = ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'];
+    const colors = ['#ebedf0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'];
     const OSCommands = [getCommandsWindows, getCommandsLinux];
 
     const [selectedType, setSelectedType] = useState(1);
@@ -98,16 +98,16 @@ export default function App() {
                 />
 
                 <div className='boardButtons'>
-                    <button className='clearButton' onClick={() => clearBoard()}>
-                        Очистить
-                    </button>
-
                     <button className='generateButton' onClick={() => generateScript()}>
                         Сгенерировать
                     </button>
 
                     <button className='copyButton' onClick={() => copy(generatedCode)}>
                         Скопировать
+                    </button>
+
+                    <button className='clearButton' onClick={() => clearBoard()}>
+                        Очистить
                     </button>
                 </div>
 
