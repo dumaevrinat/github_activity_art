@@ -39,7 +39,7 @@ export default function App() {
     };
 
     const setBoardTemplate = (i) => {
-        const templateSquaresTypes = boardTemplates[i].squaresTypes;
+        const templateSquaresTypes = boardTemplates[i].squaresTypes();
 
         const newSquares = squares.map((square, index) => {
                 square.type = templateSquaresTypes[index];

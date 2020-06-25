@@ -1,7 +1,6 @@
 {
   "name": "github_activity_art",
   "version": "0.1.0",
-  "homepage": "https://dumaevrinat.github.io/github_activity_art",
   "dependencies": {
     "copy-to-clipboard": "^3.3.1",
     "gh-pages": "^3.1.0",

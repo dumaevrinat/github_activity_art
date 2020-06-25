@@ -3,7 +3,7 @@
     --color-secondary: #6f42c1;
 
     --color-default: #24292e;
-    --color-background-default: #fafbfc;
+    --color-background-default: #f6f8fa;
     --color-background-secondary: #fff;
 }
 
@@ -35,7 +35,7 @@ button {
     border: 0;
     outline: none;
     padding: 0.6em 1em 0.6em 1em;
-    margin: 1em;
+    margin: 0.6em 1em 0.6em 1em;
     font-family: 'Product Sans Bold', sans-serif;
     font-size: 16px;
     color: var(--color-background-secondary);
@@ -77,7 +77,6 @@ select {
     border-radius: 0.4em;
 }
 
-
 header {
     flex-direction: row;
     background-color: var(--color-background-default);
@@ -99,6 +98,10 @@ a:hover {
 
 a:active {
     filter: brightness(0.9);
+}
+
+ul {
+    margin: 0 0 0 0;
 }
 
 pre {
@@ -209,8 +212,6 @@ footer {
 }
 
 .OSSettings {
-    display: flex;
-    flex-direction: column;
     margin-right: 1em;
 }
 
@@ -273,13 +274,6 @@ footer {
 
 .clearButton {
     background-color: var(--color-secondary);
-}
-
-.generateButton {
-    background-color: var(--color-primary);
-}
-
-.copyButton {
 }
 
 .generatedCode {
