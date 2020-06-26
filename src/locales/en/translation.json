@@ -1,0 +1,19 @@
+{
+  "project_description": "Customize your GitHub activity graph using this drawing tool. It generates commits that populates the activity graph.",
+  "examples": "Examples",
+  "settings": "Settings",
+  "settings color": "Color",
+  "settings max commit count": "Maximum number of commits",
+  "settings operating system": "OS",
+  "settings start date": "Start date",
+  "settings selected date": "Selected date",
+  "generate": "Generate",
+  "copy": "Copy",
+  "clear": "Clear",
+  "script": "Script",
+  "publication": "Publication",
+  "create a repository": "Create a repository on GitHub.",
+  "clone a repository": "Clone a repository:",
+  "run the generated script": "Run the generated script.",
+  "push the changes in your local repository to github": "Push the changes in your local repository to GitHub:"
+}

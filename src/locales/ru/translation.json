@@ -1,0 +1,19 @@
+{
+  "project_description": "Настройте свой график активности GitHub так, как вам нравится, используя этот инструмент для рисования. Он генерирует набор коммитов, который заполняет график активности.",
+  "examples": "Примеры",
+  "settings": "Настройки",
+  "settings color": "Цвет",
+  "settings max commit count": "Максимальное кол-во коммитов",
+  "settings operating system": "Операционная система",
+  "settings start date": "Начальная дата",
+  "settings selected date": "Выбранная дата",
+  "generate": "Сгенерировать",
+  "copy": "Скопировать",
+  "clear": "Очистить",
+  "script": "Скрипт",
+  "publication": "Публикация",
+  "create a repository": "Создайте репозиторий на GitHub",
+  "clone a repository": "Склонируйте репозиторий",
+  "run the generated script": "Запустите сгенерированный",
+  "push the changes in your local repository to github": "Занесите все изменения, которые были сделаны в локальном репозитории, на GitHub"
+}

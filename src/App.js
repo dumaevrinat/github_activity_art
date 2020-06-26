@@ -8,6 +8,7 @@ import {getSquares, generateCode, getCommandsWindows, getCommandsLinux} from './
 import BoardTemplatesCarousel from './components/BoardTemplatesCarousel/BoardTemplatesCarousel'
 import Settings from "./components/Settings/Settings";
 import Board from './components/Board/Board'
+import {useTranslation} from "react-i18next";
 
 
 export default function App() {
@@ -23,8 +24,10 @@ export default function App() {
     const [selectedOS, setSelectedOS] = useState(0);
     const [maxCommitCount, setMaxCommitCount] = useState(10);
     const [squares, setSquares] = useState(getSquares(date));
-    const [generatedCode, setGeneratedCode] = useState(undefined);
+    const [generatedCode, setGeneratedCode] = useState('');
     const [isMouseDown, setIsMouseDown] = useState(false);
+
+    const { t } = useTranslation();
 
     const paintSquare = (i) => {
         const newSquares = squares.slice();
@@ -77,51 +80,90 @@ export default function App() {
             paintSquareContinuously,
             paintSquare
         }}>
-            <div className='app' onMouseUp={() => setIsMouseDown(false)}>
-                <h3>Примеры</h3>
-                <BoardTemplatesCarousel
-                    boardTemplates={boardTemplates}
-                />
+            <header>
+                <div className="container">
+                    <div className="header__logo">
+                        GitHub Activity Art
+                    </div>
+                </div>
+            </header>
 
-                <h3>Настройки</h3>
-                <Settings
-                    selectedType={selectedType}
-                    colors={colors}
-                    maxCommitCount={maxCommitCount}
-                    selectedOS={selectedOS}
-                    startDate={startDate}
-                    selectedDate={selectedDate}
-                />
-
-                <Board
-                    squares={squares}
-                    colors={colors}
-                />
-
-                <div className='boardButtons'>
-                    <button className='generateButton' onClick={() => generateScript()}>
-                        Сгенерировать
-                    </button>
-
-                    <button className='copyButton' onClick={() => copy(generatedCode)}>
-                        Скопировать
-                    </button>
-
-                    <button className='clearButton' onClick={() => clear()}>
-                        Очистить
-                    </button>
+            <div className="container">
+                <div className="description">
+                    {t('project_description')}
                 </div>
 
-                <h3>Скрипт</h3>
-                <div className='block'>
+                <div className='app' onMouseUp={() => setIsMouseDown(false)}>
+                    <h3>{t('examples')}</h3>
+                    <BoardTemplatesCarousel
+                        boardTemplates={boardTemplates}
+                    />
+
+                    <h3>{t('settings')}</h3>
+                    <Settings
+                        selectedType={selectedType}
+                        colors={colors}
+                        maxCommitCount={maxCommitCount}
+                        selectedOS={selectedOS}
+                        startDate={startDate}
+                        selectedDate={selectedDate}
+                    />
+
+                    <Board
+                        squares={squares}
+                        colors={colors}
+                    />
+
+                    <div className='boardButtons'>
+                        <button className='generateButton' onClick={() => generateScript()}>
+                            {t('generate')}
+                        </button>
+
+                        <button className='copyButton' onClick={() => copy(generatedCode)}>
+                            {t('copy')}
+                        </button>
+
+                        <button className='clearButton' onClick={() => clear()}>
+                            {t('clear')}
+                        </button>
+                    </div>
+
+                    <h3>{t('script')}</h3>
+                    <div className='block'>
                     <textarea
                         className='generatedCode'
                         value={generatedCode}
                         readOnly
                         disabled={true}>
                     </textarea>
+                    </div>
+                </div>
+
+                <h3>{t('publication')}</h3>
+
+                <div className="block publication">
+                    <ul>
+                        <li>
+                            {t('create a repository')}
+                        </li>
+                        <li>
+                            {t('clone a repository')}
+                            <pre>git clone https://github.com/USERNAME/REPOSITORY NAME.git</pre>
+                        </li>
+                        <li>
+                            {t('run the generated script')}
+                        </li>
+                        <li>
+                            {t('push the changes in your local repository to github')}
+                            <pre>git push -u origin master</pre>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
+            <footer>
+                <a href="https://github.com/dumaevrinat/github_activity_art">dumaevrinat/github_activity_art</a>
+            </footer>
         </Context.Provider>
     )
 }
