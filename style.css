@@ -1,30 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 :root {
     --color-primary: #0366D6;
-    --color-secondary: #6f42c1;
+    --color-secondary: #7057ff;
 
     --color-default: #24292e;
-    --color-background-default: #fafbfc;
+    --color-background-default: #f6f8fa;
     --color-background-secondary: #fff;
-}
-
-@font-face {
-    font-family: 'Product Sans Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: url('fonts/ProductSans-Regular.woff') format('woff');
-}
-
-
-@font-face {
-    font-family: 'Product Sans Bold';
-    font-style: normal;
-    font-weight: normal;
-    src: url('fonts/ProductSans-Bold.woff') format('woff');
 }
 
 body {
     margin: 0;
-    font-family: 'Product Sans Regular', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-default);
@@ -35,8 +21,9 @@ button {
     border: 0;
     outline: none;
     padding: 0.6em 1em 0.6em 1em;
-    margin: 1em;
-    font-family: 'Product Sans Bold', sans-serif;
+    margin: 0.6em 1em 0.6em 1em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
     font-size: 16px;
     color: var(--color-background-secondary);
     background-color: var(--color-primary);
@@ -57,7 +44,7 @@ input {
     height: 1.5em;
     border: 0;
     outline: none;
-    font-family: 'Product Sans Regular', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1em;
     background-color: var(--color-background-default);
     padding: 0.25em 0.25em;
@@ -69,14 +56,13 @@ select {
     height: 2em;
     border: 0;
     outline: none;
-    font-family: 'Product Sans Regular', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1em;
     background-color: var(--color-background-default);
     padding: 0.25em 0.25em;
     margin-bottom: 0.25em;
     border-radius: 0.4em;
 }
-
 
 header {
     flex-direction: row;
@@ -89,7 +75,8 @@ h3 {
 
 a {
     text-decoration: none;
-    font-family: 'Product Sans Bold', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
     color: var(--color-default);
 }
 
@@ -99,6 +86,10 @@ a:hover {
 
 a:active {
     filter: brightness(0.9);
+}
+
+ul {
+    margin: 0 0 0 0;
 }
 
 pre {
@@ -140,7 +131,7 @@ footer {
 .header__logo {
     margin: 10px auto 10px auto;
     white-space: nowrap;
-    font-size: 24px;
+    font-size: 2em;
     font-weight: bold;
     color: var(--color-default);
 }
@@ -168,16 +159,18 @@ footer {
 
 .settings {
     justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    flex-flow: wrap;
+    align-items: flex-start;
 }
 
-.colorSettings {
-    display: flex;
-    flex-direction: column;
+.settings_item {
     margin-right: 1em;
 }
 
+.dateSettings {
+    display: flex;
+    flex-direction: row;
+}
 
 .colorPalette {
     flex-direction: row;
@@ -185,7 +178,8 @@ footer {
 }
 
 .settingsDescription {
-    font-family: 'Product Sans Bold', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
 }
 
 .colorButton {
@@ -202,23 +196,6 @@ footer {
     margin: 0.2em 0.2em 0.2em 0;
     padding: 0 0 0 0;
     border: 0.15em solid var(--color-default);
-}
-
-.maxCommitSettings {
-    margin-right: 1em;
-}
-
-.OSSettings {
-    display: flex;
-    flex-direction: column;
-    margin-right: 1em;
-}
-
-.dateSettings {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-right: 1em;
 }
 
 .date {
@@ -273,13 +250,6 @@ footer {
 
 .clearButton {
     background-color: var(--color-secondary);
-}
-
-.generateButton {
-    background-color: var(--color-primary);
-}
-
-.copyButton {
 }
 
 .generatedCode {

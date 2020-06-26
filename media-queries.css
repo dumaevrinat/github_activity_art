@@ -1,10 +1,10 @@
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1070px) {
     .settings {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-    .settingsDescription {
+    .settings_item {
         margin-bottom: 1.5em;
     }
 }
