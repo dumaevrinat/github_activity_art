@@ -158,18 +158,19 @@ footer {
 }
 
 .settings {
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-flow: wrap;
     align-items: flex-start;
 }
 
 .settings_item {
-    margin-right: 1em;
+    margin-right: 3em;
 }
 
 .dateSettings {
     display: flex;
     flex-direction: row;
+    margin-right: 0;
 }
 
 .colorPalette {
