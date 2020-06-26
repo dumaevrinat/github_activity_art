@@ -1,4 +1,4 @@
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 1000px) {
     .settings {
         display: flex;
         flex-direction: column;
