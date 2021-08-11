@@ -1,13 +1,3 @@
-<div align='center'>
-    <a href='//dumaevrinat.github.io/github_activity_art'>
-      <h1>GitHub Activity Art</h1>
-    </a>
-
-*Tool that helps generate a GitHub Contribution Graph.*
-</div>
-
-<br>
-
 <p align="center">
     <a href="//dumaevrinat.github.io/github_activity_art">
       <img src="./docs/page.png" />
